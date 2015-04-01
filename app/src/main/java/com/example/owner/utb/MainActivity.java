@@ -1,19 +1,25 @@
 package com.example.owner.utb;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -21,8 +27,10 @@ import java.util.ArrayList;
 public class MainActivity extends ActionBarActivity {
 
     public ArrayList<Pokemon> pokeList = new ArrayList<Pokemon>();
+    ArrayAdapter<Pokemon> arrayAdapter;
     private ListView lv;
-    EditText editSearch;
+    EditText inputSearch;
+    ImageButton activeSlot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +39,11 @@ public class MainActivity extends ActionBarActivity {
 
 
         lv = (ListView) findViewById(R.id.pokeList);
+        inputSearch = (EditText) findViewById(R.id.inputSearch);
+        inputSearch.setText("Search");
         initList();
 
-        ArrayAdapter<Pokemon> arrayAdapter = new ArrayAdapter<Pokemon>(
+         arrayAdapter = new ArrayAdapter<Pokemon>(
                 this,
                 android.R.layout.simple_list_item_1,
                 pokeList);
@@ -44,9 +54,48 @@ public class MainActivity extends ActionBarActivity {
         final ImageButton slot1 = (ImageButton) findViewById(R.id.slot1);
         slot1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                activeSlot = (ImageButton) findViewById(R.id.slot1);
                 findViewById(R.id.pokeList).setVisibility(View.VISIBLE);
-
+                findViewById(R.id.inputSearch).setVisibility(View.VISIBLE);
                 findViewById(R.id.resistChart).setVisibility(View.GONE);
+
+
+                //Search Bar
+                inputSearch.addTextChangedListener(new TextWatcher() {
+
+                    @Override
+                    public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                        // When user changed the Text
+                        MainActivity.this.arrayAdapter.getFilter().filter(cs);
+                    }
+
+                    @Override
+                    public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                                  int arg3) {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable arg0) {
+                        // TODO Auto-generated method stub
+                    }
+                });
+            }
+        });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+
+                //String number = ((TextView)view).getText().toString();
+                //activeSlot.setBackgroundResource(R.drawable.pokeball2);
+
+
+                findViewById(R.id.pokeList).setVisibility(View.GONE);
+                findViewById(R.id.inputSearch).setVisibility(View.GONE);
+                findViewById(R.id.resistChart).setVisibility(View.VISIBLE);
             }
         });
 
@@ -59,6 +108,8 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -1394,14 +1394,24 @@
         </TableLayout>
     </ScrollView>
 
+    <EditText android:id="@+id/inputSearch"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:layout_below="@+id/linearLayout"
+        android:visibility="gone"
+        android:background="@color/button_material_light"
+        android:textColor="@color/material_blue_grey_800"
+        android:textSize="20sp"
+        android:selectAllOnFocus="true"
 
+    />
 
     <ListView
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/pokeList"
-        android:layout_below="@+id/linearLayout" />
+        android:layout_below="@+id/inputSearch" />
 
 
 </RelativeLayout>
