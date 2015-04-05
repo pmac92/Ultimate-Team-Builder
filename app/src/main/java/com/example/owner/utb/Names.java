@@ -672,7 +672,7 @@ public enum Names {
         Vivillon,
         Litleo,
         Pyroar,
-        Flabébé,
+        Flabebe,
         Floette,
         Florges,
         Skiddo,
@@ -724,5 +724,6 @@ public enum Names {
         Zygarde,
         Diancie,
         Hoopa,
-        Volcanion
+        Volcanion,
+        NONE
 }

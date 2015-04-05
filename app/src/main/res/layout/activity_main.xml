@@ -19,6 +19,12 @@
 
 
         <ImageButton
+            android:id="@+id/slot0"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/pokeball" />
+
+        <ImageButton
             android:id="@+id/slot1"
             android:layout_width="55dp"
             android:layout_height="fill_parent"
@@ -44,12 +50,6 @@
 
         <ImageButton
             android:id="@+id/slot5"
-            android:layout_width="55dp"
-            android:layout_height="fill_parent"
-            android:background="@drawable/pokeball" />
-
-        <ImageButton
-            android:id="@+id/slot6"
             android:layout_width="55dp"
             android:layout_height="fill_parent"
             android:background="@drawable/pokeball" />
@@ -79,11 +79,14 @@
 
                 <TextView
                     android:id="@+id/typeResist"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="30dp"
-                    android:layout_margin="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="0dp"
                     android:text="Resistances"
-                    android:textSize="20sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/material_blue_grey_800"/>
 
                 <TextView
                     android:id="@+id/zero"
@@ -149,7 +152,7 @@
 
                 <TextView
                     android:id="@+id/norm"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Normal"
@@ -218,7 +221,7 @@
 
                 <TextView
                     android:id="@+id/fight"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Fighting"
@@ -288,7 +291,7 @@
 
                 <TextView
                     android:id="@+id/fly"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Flying"
@@ -357,7 +360,7 @@
 
                 <TextView
                     android:id="@+id/psn"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Poison"
@@ -427,7 +430,7 @@
 
                 <TextView
                     android:id="@+id/grnd"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Ground"
@@ -496,7 +499,7 @@
 
                 <TextView
                     android:id="@+id/rock"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Rock"
@@ -566,7 +569,7 @@
 
                 <TextView
                     android:id="@+id/bug"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Bug"
@@ -635,7 +638,7 @@
 
                 <TextView
                     android:id="@+id/ghost"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Ghost"
@@ -705,7 +708,7 @@
 
                 <TextView
                     android:id="@+id/steel"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Steel"
@@ -774,7 +777,7 @@
 
                 <TextView
                     android:id="@+id/fire"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Fire"
@@ -808,7 +811,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/firetOne"
+                    android:id="@+id/fireOne"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
@@ -844,7 +847,7 @@
 
                 <TextView
                     android:id="@+id/water"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Water"
@@ -913,7 +916,7 @@
 
                 <TextView
                     android:id="@+id/grs"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Grass"
@@ -947,7 +950,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/grstOne"
+                    android:id="@+id/grsOne"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
@@ -983,7 +986,7 @@
 
                 <TextView
                     android:id="@+id/elec"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Electric"
@@ -1052,7 +1055,7 @@
 
                 <TextView
                     android:id="@+id/psy"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Psychic"
@@ -1122,7 +1125,7 @@
 
                 <TextView
                     android:id="@+id/ice"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Ice"
@@ -1147,7 +1150,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/icecHalf"
+                    android:id="@+id/iceHalf"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
@@ -1191,7 +1194,7 @@
 
                 <TextView
                     android:id="@+id/drg"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Dragon"
@@ -1261,7 +1264,7 @@
 
                 <TextView
                     android:id="@+id/dark"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Dark"
@@ -1330,7 +1333,7 @@
 
                 <TextView
                     android:id="@+id/fry"
-                    android:layout_width="110dp"
+                    android:layout_width="90dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:text="Fairy"
