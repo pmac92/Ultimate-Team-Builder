@@ -26,7 +26,7 @@ public class Pokemon {
 
 
     public Pokemon(Names name, int dexNum, Type type1, Type type2, AbilityEnum ab1, AbilityEnum ab2, AbilityEnum hiddenAb,
-                   int hp, int atk, int def, int spA, int spD, int spe){
+                   boolean canHaveItem, int hp, int atk, int def, int spA, int spD, int spe){
 
         this.name = name;
         this.dexNum = dexNum;
@@ -35,6 +35,7 @@ public class Pokemon {
         this.ab1 = ab1;
         this.ab2 = ab2;
         this.hiddenAb = hiddenAb;
+        this.canHaveItem = canHaveItem;
         this.hp = hp;
         this.atk = atk;
         this.def = def;

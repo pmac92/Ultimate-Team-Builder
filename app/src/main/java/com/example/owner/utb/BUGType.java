@@ -14,6 +14,6 @@ public class BUGType extends Type{
         //Weaknesses
         super.resistMatrix[2][4] = 1;
         super.resistMatrix[5][4] = 1;
-        super.resistMatrix[11][4] = 1;
+        super.resistMatrix[9][4] = 1;
     }
 }
