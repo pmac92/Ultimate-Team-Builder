@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -55,6 +55,37 @@
             android:background="@drawable/pokeball" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/tabs"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/typeChartTab"
+            android:layout_width="130dp"
+            android:paddingRight="5dp"
+            android:layout_height="wrap_content"
+            android:text="Type Chart"
+            android:textSize="25sp"
+            android:onClick="onClick"
+            android:clickable="true"
+            android:background="@color/lightbluegray"/>
+
+        <TextView
+            android:id="@+id/analysisTab"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Stat Analysis"
+            android:textSize="25sp"
+            android:onClick="onClick"
+            android:clickable="true"
+            android:background="@color/sleekgray"
+            />
+
+    </LinearLayout>
+
 
     <ScrollView
         android:id="@+id/resistChart"
@@ -63,7 +94,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout">
+        android:layout_below="@+id/tabs"
+        android:background="@color/lightbluegray">
 
         <TableLayout
             android:layout_width="fill_parent"
@@ -74,7 +106,7 @@
 
             <TableRow
                 android:id="@+id/top"
-                android:layout_height="55dp"
+                android:layout_height="45dp"
                 android:layout_width="wrap_content">
 
                 <TextView
@@ -86,7 +118,7 @@
                     android:text="Resistances"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/material_blue_grey_800"/>
+                    android:textColor="@color/darkgray"/>
 
                 <TextView
                     android:id="@+id/zero"
@@ -95,7 +127,8 @@
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="0"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/darkgray"/>
 
                 <TextView
                     android:id="@+id/fourth"
@@ -104,7 +137,8 @@
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="1/4"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textColor="@color/darkgray"/>
 
                 <TextView
                     android:id="@+id/half"
@@ -113,7 +147,8 @@
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="1/2"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textColor="@color/darkgray"/>
 
                 <TextView
                     android:id="@+id/one"
@@ -122,7 +157,8 @@
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="1"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/darkgray"/>
 
                 <TextView
                     android:id="@+id/two"
@@ -131,7 +167,8 @@
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="2"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/darkgray"/>
 
                 <TextView
                     android:id="@+id/four"
@@ -140,23 +177,24 @@
                     android:layout_margin="5dp"
                     android:gravity="center"
                     android:text="4"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/darkgray"/>
             </TableRow>
 
             <TableRow
                 android:id="@+id/normal"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
-                android:background="@color/button_material_light"
-                android:layout_width="wrap_content">
+
+                android:background="@color/lightgray"
+                android:layout_width="wrap_content"
+                >
 
                 <TextView
                     android:id="@+id/norm"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Normal"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/normZero"
@@ -216,14 +254,13 @@
             <TableRow
                 android:id="@+id/fighting"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
+
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/fight"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Fighting"
                     android:textSize="14sp" />
 
@@ -285,15 +322,14 @@
             <TableRow
                 android:id="@+id/flying"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
-                android:background="@color/button_material_light"
+
+                android:background="@color/lightgray"
                 android:layout_width="wrap_content">
 
                 <TextView
                     android:id="@+id/fly"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Flying"
                     android:textSize="14sp" />
 
@@ -355,14 +391,13 @@
             <TableRow
                 android:id="@+id/poison"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
+
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/psn"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Poison"
                     android:textSize="14sp" />
 
@@ -424,15 +459,14 @@
             <TableRow
                 android:id="@+id/ground"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
-                android:background="@color/button_material_light"
+
+                android:background="@color/lightgray"
                 android:layout_width="wrap_content">
 
                 <TextView
                     android:id="@+id/grnd"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Ground"
                     android:textSize="14sp" />
 
@@ -494,14 +528,13 @@
             <TableRow
                 android:id="@+id/rockRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
+
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/rock"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Rock"
                     android:textSize="14sp" />
 
@@ -563,15 +596,14 @@
             <TableRow
                 android:id="@+id/bugRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
-                android:background="@color/button_material_light"
+
+                android:background="@color/lightgray"
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/bug"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Bug"
                     android:textSize="14sp" />
 
@@ -633,14 +665,13 @@
             <TableRow
                 android:id="@+id/ghostRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
+
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/ghost"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Ghost"
                     android:textSize="14sp" />
 
@@ -702,15 +733,14 @@
             <TableRow
                 android:id="@+id/steelRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
-                android:background="@color/button_material_light"
+
+                android:background="@color/lightgray"
                 android:layout_width="wrap_content">
 
                 <TextView
                     android:id="@+id/steel"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Steel"
                     android:textSize="14sp" />
 
@@ -772,14 +802,13 @@
             <TableRow
                 android:id="@+id/fireRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
+
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/fire"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Fire"
                     android:textSize="14sp" />
 
@@ -841,15 +870,14 @@
             <TableRow
                 android:id="@+id/waterRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
-                android:background="@color/button_material_light"
+
+                android:background="@color/lightgray"
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/water"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Water"
                     android:textSize="14sp" />
 
@@ -911,14 +939,13 @@
             <TableRow
                 android:id="@+id/grassRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
+
                 android:layout_width="wrap_content">
 
                 <TextView
                     android:id="@+id/grs"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Grass"
                     android:textSize="14sp" />
 
@@ -980,15 +1007,14 @@
             <TableRow
                 android:id="@+id/elecRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
-                android:background="@color/button_material_light"
+
+                android:background="@color/lightgray"
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/elec"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Electric"
                     android:textSize="14sp" />
 
@@ -1050,14 +1076,13 @@
             <TableRow
                 android:id="@+id/psyRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
+
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/psy"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Psychic"
                     android:textSize="14sp" />
 
@@ -1119,15 +1144,14 @@
             <TableRow
                 android:id="@+id/iceRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
-                android:background="@color/button_material_light"
+
+                android:background="@color/lightgray"
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/ice"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Ice"
                     android:textSize="14sp" />
 
@@ -1189,14 +1213,13 @@
             <TableRow
                 android:id="@+id/drgRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
+
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/drg"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Dragon"
                     android:textSize="14sp" />
 
@@ -1258,15 +1281,14 @@
             <TableRow
                 android:id="@+id/darkRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
-                android:background="@color/button_material_light"
+
+                android:background="@color/lightgray"
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/dark"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Dark"
                     android:textSize="14sp" />
 
@@ -1328,14 +1350,13 @@
             <TableRow
                 android:id="@+id/fryRow"
                 android:layout_height="30dp"
-                android:layout_marginBottom="2dp"
+
                 android:layout_width="match_parent">
 
                 <TextView
                     android:id="@+id/fry"
                     android:layout_width="90dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:text="Fairy"
                     android:textSize="14sp" />
 
@@ -1414,7 +1435,68 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/pokeList"
-        android:layout_below="@+id/inputSearch" />
+        android:layout_below="@+id/inputSearch"/>
+
+    <ScrollView
+        android:id="@+id/analysisSection"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tabs"
+        android:background="@color/sleekgray">
+
+        <LinearLayout
+            android:id="@+id/analysislinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/offthreatslabel"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="Offensive Threats"
+                android:textSize="20sp"
+            />
+
+            <TextView
+                android:id="@+id/offthreatstv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp"
+                android:paddingBottom="30dp"
+            />
+
+            <TextView
+                android:id="@+id/wallthreatslabel"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="Possible Walls"
+                android:textSize="20sp"
+
+             />
+
+            <TextView
+                android:id="@+id/wallthreatstv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp"
+                />
+
+        </LinearLayout>
+
+
+
+
+
+    </ScrollView>
 
 
 </RelativeLayout>

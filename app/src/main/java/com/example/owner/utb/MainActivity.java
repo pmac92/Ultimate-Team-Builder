@@ -39,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
     Pokemon[] team = new Pokemon[6];
     int matW = 6;
     int matH = 18;
+    int [] teamType = new int[18];
 
     BUGType BUG = new BUGType();
     DARKType DARK = new DARKType();
@@ -60,6 +61,18 @@ public class MainActivity extends ActionBarActivity {
     WATERType WATER = new WATERType();
     NONEType NONE = new NONEType();
 
+    boolean bugWeak,darkWeak,dragonWeak,electricWeak,fairyWeak,fightingWeak,fireWeak,flyingWeak,
+            ghostWeak,grassWeak,groundWeak,iceWeak,normalWeak,poisonWeak,
+            psychicWeak,rockWeak,steelWeak,waterWeak;
+    boolean evaluateOnlyTypeWeaknesses = true;
+    ArrayList<Boolean> weakArrayBool = new ArrayList<Boolean>(Arrays.asList(bugWeak,darkWeak,dragonWeak,electricWeak,
+            fairyWeak,fightingWeak,fireWeak,flyingWeak,ghostWeak,grassWeak,groundWeak,iceWeak,normalWeak,poisonWeak,
+            psychicWeak,rockWeak,steelWeak,waterWeak));
+    ArrayList<Type> weakArrayType = new ArrayList<Type>();
+    ArrayList<Pokemon> offensiveThreats = new ArrayList<Pokemon>();
+    ArrayList<Pokemon> wallThreats = new ArrayList<Pokemon>();
+    ArrayAdapter<Pokemon> offThreatAdapt;
+    ArrayAdapter<Pokemon> wallThreatAdapt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +155,26 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
+        //typeChartTab
+        final TextView typeChartTab = (TextView) findViewById(R.id.typeChartTab);
+        typeChartTab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(R.id.analysisSection).setVisibility(View.GONE);
+                findViewById(R.id.resistChart).setVisibility(View.VISIBLE);
+            }
+        });
+
+        //Anaysis Tab
+        final TextView analysisTab = (TextView) findViewById(R.id.analysisTab);
+        analysisTab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                findViewById(R.id.resistChart).setVisibility(View.GONE);
+                findViewById(R.id.analysisSection).setVisibility(View.VISIBLE);
+                analyzeTeamStats();
+            }
+        });
+
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -202,6 +235,7 @@ public class MainActivity extends ActionBarActivity {
         findViewById(R.id.pokeList).setVisibility(View.VISIBLE);
         findViewById(R.id.inputSearch).setVisibility(View.VISIBLE);
         findViewById(R.id.resistChart).setVisibility(View.GONE);
+        findViewById(R.id.analysisSection).setVisibility(View.GONE);
 
 
         //Search Bar
@@ -446,24 +480,24 @@ public class MainActivity extends ActionBarActivity {
 
         }
         //Change Row colors
-        rowEval(sumWeak(teamResistMatrix, 0),sumRes(teamResistMatrix, 0), normLabel,1);
-        rowEval(sumWeak(teamResistMatrix, 1),sumRes(teamResistMatrix,1), fightLabel,0);
-        rowEval(sumWeak(teamResistMatrix, 2),sumRes(teamResistMatrix,2), flyLabel,1);
-        rowEval(sumWeak(teamResistMatrix, 3),sumRes(teamResistMatrix,3), psnLabel,0);
-        rowEval(sumWeak(teamResistMatrix, 4),sumRes(teamResistMatrix,4), grndLabel,1);
-        rowEval(sumWeak(teamResistMatrix, 5),sumRes(teamResistMatrix,5), rockLabel,0);
-        rowEval(sumWeak(teamResistMatrix, 6),sumRes(teamResistMatrix,6), bugLabel,1);
-        rowEval(sumWeak(teamResistMatrix, 7),sumRes(teamResistMatrix,7), ghostLabel,0);
-        rowEval(sumWeak(teamResistMatrix, 8),sumRes(teamResistMatrix,8), steelLabel,1);
-        rowEval(sumWeak(teamResistMatrix, 9),sumRes(teamResistMatrix,9), fireLabel,0);
-        rowEval(sumWeak(teamResistMatrix, 10),sumRes(teamResistMatrix,10), waterLabel,1);
-        rowEval(sumWeak(teamResistMatrix, 11),sumRes(teamResistMatrix,11), grsLabel,0);
-        rowEval(sumWeak(teamResistMatrix, 12),sumRes(teamResistMatrix,12), elecLabel,1);
-        rowEval(sumWeak(teamResistMatrix, 13),sumRes(teamResistMatrix,13), psyLabel,0);
-        rowEval(sumWeak(teamResistMatrix, 14),sumRes(teamResistMatrix,14), iceLabel,1);
-        rowEval(sumWeak(teamResistMatrix, 15),sumRes(teamResistMatrix,15), drgLabel,0);
-        rowEval(sumWeak(teamResistMatrix, 16),sumRes(teamResistMatrix,16), darkLabel,1);
-        rowEval(sumWeak(teamResistMatrix, 17),sumRes(teamResistMatrix,17), fryLabel,0);
+        normalWeak = rowEval(sumWeak(teamResistMatrix, 0),sumRes(teamResistMatrix, 0), normLabel,1);
+        fightingWeak = rowEval(sumWeak(teamResistMatrix, 1),sumRes(teamResistMatrix,1), fightLabel,0);
+        flyingWeak = rowEval(sumWeak(teamResistMatrix, 2),sumRes(teamResistMatrix,2), flyLabel,1);
+        poisonWeak = rowEval(sumWeak(teamResistMatrix, 3),sumRes(teamResistMatrix,3), psnLabel,0);
+        groundWeak = rowEval(sumWeak(teamResistMatrix, 4),sumRes(teamResistMatrix,4), grndLabel,1);
+        rockWeak = rowEval(sumWeak(teamResistMatrix, 5),sumRes(teamResistMatrix,5), rockLabel,0);
+        bugWeak = rowEval(sumWeak(teamResistMatrix, 6),sumRes(teamResistMatrix,6), bugLabel,1);
+        ghostWeak = rowEval(sumWeak(teamResistMatrix, 7),sumRes(teamResistMatrix,7), ghostLabel,0);
+        steelWeak = rowEval(sumWeak(teamResistMatrix, 8),sumRes(teamResistMatrix,8), steelLabel,1);
+        fireWeak = rowEval(sumWeak(teamResistMatrix, 9),sumRes(teamResistMatrix,9), fireLabel,0);
+        waterWeak = rowEval(sumWeak(teamResistMatrix, 10),sumRes(teamResistMatrix,10), waterLabel,1);
+        grassWeak = rowEval(sumWeak(teamResistMatrix, 11),sumRes(teamResistMatrix,11), grsLabel,0);
+        electricWeak = rowEval(sumWeak(teamResistMatrix, 12),sumRes(teamResistMatrix,12), elecLabel,1);
+        psychicWeak = rowEval(sumWeak(teamResistMatrix, 13),sumRes(teamResistMatrix,13), psyLabel,0);
+        iceWeak = rowEval(sumWeak(teamResistMatrix, 14),sumRes(teamResistMatrix,14), iceLabel,1);
+        dragonWeak = rowEval(sumWeak(teamResistMatrix, 15),sumRes(teamResistMatrix,15), drgLabel,0);
+        darkWeak = rowEval(sumWeak(teamResistMatrix, 16),sumRes(teamResistMatrix,16), darkLabel,1);
+        fairyWeak = rowEval(sumWeak(teamResistMatrix, 17),sumRes(teamResistMatrix,17), fryLabel,0);
 
 
 
@@ -614,13 +648,20 @@ public class MainActivity extends ActionBarActivity {
         team[5] = new Pokemon(Names.NONE,0,NONE,NONE,AbilityEnum.NONE,AbilityEnum.NONE,AbilityEnum.NONE,false,0,0,0,0,0,0);
     }
 
-    private void rowEval(int weaknesses, int resistances, TextView tv, int rowColor){
-        if(weaknesses > resistances) tv.setBackgroundColor(Color.parseColor("#EE796C"));
-        if (weaknesses < resistances) tv.setBackgroundColor(Color.parseColor("#6CEE6C"));
-        else if (weaknesses == resistances){
-            if (rowColor == 0) tv.setBackgroundColor(Color.parseColor("#EFEFEF"));
-            if (rowColor == 1) tv.setBackgroundColor(Color.parseColor("#D4D4D4"));
+    private boolean rowEval(int weaknesses, int resistances, TextView tv, int rowColor){
+        if(weaknesses > resistances){
+            tv.setBackgroundColor(Color.parseColor("#EE796C")); //red
+            return true;
         }
+        if (weaknesses < resistances) tv.setBackgroundColor(Color.parseColor("#6CEE6C")); //green
+        else if (weaknesses == resistances){
+            if (rowColor == 0) tv.setBackgroundColor(Color.parseColor("#BEE1E8")); //row color
+            if (rowColor == 1) tv.setBackgroundColor(Color.parseColor("#B3B3B3"));
+        }
+
+        if(resistances < 3 || weaknesses >= resistances) return true;
+
+        return false;
     }
 
     private int sumRes(int[][] matrix, int row){
@@ -629,6 +670,264 @@ public class MainActivity extends ActionBarActivity {
 
     private int sumWeak(int[][] matrix, int row){
         return matrix[row][4]+matrix[row][5];
+    }
+
+    private void analyzeTeamStats(){
+        int maxHp=0,maxAtk=0,maxDef=0,maxSpA=0,maxSpD=0,maxSpe=0;
+
+        offensiveThreats.clear();
+        wallThreats.clear();
+        weakArrayType.clear();
+
+        if(bugWeak == true) weakArrayType.add(BUG);
+        if(darkWeak == true) weakArrayType.add(DARK);
+        if(dragonWeak == true) weakArrayType.add(DRAGON);
+        if(electricWeak == true) weakArrayType.add(ELECTRIC);
+        if(fairyWeak == true) weakArrayType.add(FAIRY);
+        if(fightingWeak == true) weakArrayType.add(FIGHTING);
+        if(fireWeak == true) weakArrayType.add(FIRE);
+        if(flyingWeak == true) weakArrayType.add(FLYING);
+        if(ghostWeak == true) weakArrayType.add(GHOST);
+        if(grassWeak == true) weakArrayType.add(GRASS);
+        if(groundWeak == true) weakArrayType.add(GROUND);
+        if(iceWeak == true) weakArrayType.add(ICE);
+        if(normalWeak == true) weakArrayType.add(NORMAL);
+        if(poisonWeak == true) weakArrayType.add(POISON);
+        if(psychicWeak == true) weakArrayType.add(PSYCHIC);
+        if(rockWeak == true) weakArrayType.add(ROCK);
+        if(steelWeak == true) weakArrayType.add(STEEL);
+        if(waterWeak == true) weakArrayType.add(WATER);
+
+        //Get Max Stats and types
+        for(int i=0;i<team.length;i++){
+            if(team[i].hp > maxHp) maxHp = team[i].hp;
+            if(team[i].atk > maxAtk) maxAtk = team[i].atk;
+            if(team[i].def > maxDef) maxDef = team[i].def;
+            if(team[i].spA > maxSpA) maxSpA = team[i].spA;
+            if(team[i].spD > maxSpD) maxSpD = team[i].spD;
+            if(team[i].spe > maxSpe) maxSpe = team[i].spe;
+
+            Type type1 = team[i].type1;
+            Type type2 = team[i].type1;
+
+            if(type1 == NORMAL || type2 == NORMAL){
+                teamType[7]--; //ghost
+                teamType[5]--; //rock
+                teamType[8]--; //steel
+            }
+            if(type1 == FIGHTING || type2 == FIGHTING){
+                teamType[16]++;
+                teamType[14]++;
+                teamType[0]++;
+                teamType[5]++;
+                teamType[8]++;
+                teamType[6]--;
+                teamType[17]--;
+                teamType[2]--;
+                teamType[3]--;
+                teamType[13]--;
+                teamType[7]--;
+            }
+            if(type1 == FLYING || type2 == FLYING){
+                teamType[6]++;
+                teamType[1]++;
+                teamType[11]++;
+                teamType[12]--;
+                teamType[5]--;
+                teamType[8]--;
+            }
+            if(type1 == POISON || type2 == POISON){
+                teamType[17]++;
+                teamType[11]++;
+                teamType[3]--;
+                teamType[4]--;
+                teamType[5]--;
+                teamType[7]--;
+                teamType[8]--;
+            }
+            if(type1 == GROUND || type2 == GROUND) {
+                teamType[12]++;
+                teamType[9]++;
+                teamType[3]++;
+                teamType[5]++;
+                teamType[8]++;
+                teamType[6]--;
+                teamType[11]--;
+                teamType[2]--;
+            }
+            if(type1 == ROCK || type2 == ROCK){
+                teamType[6]++;
+                teamType[9]++;
+                teamType[2]++;
+                teamType[14]++;
+                teamType[1]--;
+                teamType[4]--;
+            }
+            if(type1 == BUG || type2 == BUG){
+                teamType[16]++;
+                teamType[11]++;
+                teamType[13]++;
+                teamType[17]--;
+                teamType[1]--;
+                teamType[9]--;
+                teamType[2]--;
+                teamType[7]--;
+                teamType[3]--;
+                teamType[8]--;
+            }
+            if(type1 == GHOST || type2 == GHOST){
+                teamType[7]++;
+                teamType[13]++;
+                teamType[16]--;
+                teamType[0]--;
+            }
+            if(type1 == STEEL || type2 == STEEL){
+                teamType[17]++;
+                teamType[14]++;
+                teamType[5]++;
+                teamType[12]--;
+                teamType[9]--;
+                teamType[8]--;
+                teamType[10]--;
+            }
+            if(type1 == FIRE || type2 == FIRE){
+                teamType[6]++;
+                teamType[11]++;
+                teamType[14]++;
+                teamType[8]++;
+                teamType[15]--;
+                teamType[9]--;
+                teamType[5]--;
+                teamType[10]--;
+            }
+            if(type1 == WATER || type2 == WATER){
+                teamType[9]++;
+                teamType[4]++;
+                teamType[5]++;
+                teamType[15]--;
+                teamType[11]--;
+                teamType[10]--;
+            }
+            if(type1 == GRASS || type2 == GRASS){
+                teamType[4]++;
+                teamType[5]++;
+                teamType[10]++;
+                teamType[15]--;
+                teamType[6]--;
+                teamType[9]--;
+                teamType[2]--;
+                teamType[11]--;
+                teamType[3]--;
+                teamType[8]--;
+            }
+            if(type1 == ELECTRIC || type2 == ELECTRIC){
+                teamType[2]++;
+                teamType[10]++;
+                teamType[15]--;
+                teamType[12]--;
+                teamType[11]--;
+                teamType[4]--;
+            }
+            if(type1 == PSYCHIC || type2 == PSYCHIC){
+                teamType[1]++;
+                teamType[3]++;
+                teamType[13]--;
+                teamType[8]--;
+                teamType[16]--;
+            }
+            if(type1 == ICE || type2 == ICE){
+                teamType[15]++;
+                teamType[2]++;
+                teamType[11]++;
+                teamType[4]++;
+                teamType[9]--;
+                teamType[14]--;
+                teamType[8]--;
+                teamType[10]--;
+            }
+            if(type1 == DRAGON || type2 == DRAGON){
+                teamType[15]++;
+                teamType[8]--;
+                teamType[17]--;
+            }
+            if(type1 == DARK || type2 == DARK){
+                teamType[7]++;
+                teamType[13]++;
+                teamType[16]--;
+                teamType[17]--;
+                teamType[1]--;
+            }
+            if(type1 == FAIRY || type2 == FAIRY){
+                teamType[16]++;
+                teamType[15]++;
+                teamType[1]++;
+                teamType[9]--;
+                teamType[3]--;
+                teamType[8]--;
+            }
+        }
+
+        ArrayList<Type> wallTypes = new ArrayList<Type>();
+        if(teamType[0] < -2) wallTypes.add(NORMAL);
+        if(teamType[1] < -2) wallTypes.add(FIGHTING);
+        if(teamType[2] < -2) wallTypes.add(FLYING);
+        if(teamType[3] < -2) wallTypes.add(POISON);
+        if(teamType[4] < -2) wallTypes.add(GROUND);
+        if(teamType[5] < -2) wallTypes.add(ROCK);
+        if(teamType[6] < -2) wallTypes.add(BUG);
+        if(teamType[7] < -2) wallTypes.add(GHOST);
+        if(teamType[8] < -2) wallTypes.add(STEEL);
+        if(teamType[9] < -2) wallTypes.add(FIRE);
+        if(teamType[10] < -2) wallTypes.add(WATER);
+        if(teamType[11] < -2) wallTypes.add(GRASS);
+        if(teamType[12] < -2) wallTypes.add(ELECTRIC);
+        if(teamType[13] < -2) wallTypes.add(PSYCHIC);
+        if(teamType[14] < -2) wallTypes.add(ICE);
+        if(teamType[15] < -2) wallTypes.add(DRAGON);
+        if(teamType[16] < -2) wallTypes.add(DARK);
+        if(teamType[17] < -2) wallTypes.add(FAIRY);
+        for(int i=0;i<teamType.length;i++) {
+            System.out.println(teamType[i] + ",");
+        }
+        //Stat and Type Check
+        for(int i = 0; i< pokeList.size(); i++){
+            Pokemon currentPoke = pokeList.get(i);
+            if(currentPoke.atk >= maxDef && currentPoke.spe >= maxSpe ||
+                    currentPoke.spA >= maxSpD && currentPoke.spe >= maxSpe)
+            {
+                for(Type t : weakArrayType){
+                    if(currentPoke.type1.name == t.name || currentPoke.type2.name == t.name) offensiveThreats.add(pokeList.get(i));
+                }
+
+            }
+            if(currentPoke.def >= maxAtk || currentPoke.spD >= maxSpA){
+                if(wallTypes.contains(currentPoke.type1) || wallTypes.contains(currentPoke.type2)) wallThreats.add(pokeList.get(i));
+            }
+        }
+
+        //offThreatAdapt = new ArrayAdapter<Pokemon>(this,android.R.layout.simple_list_item_1,offensiveThreats);
+        //wallThreatAdapt = new ArrayAdapter<Pokemon>(this,android.R.layout.simple_list_item_1,wallThreats);
+
+        String offThreatString = "";
+        String wallThreatString = "";
+
+        for(Pokemon p : offensiveThreats){
+            offThreatString += "-" + p.name.toString() + "\n";
+        }
+
+        for(Pokemon p : wallThreats){
+            wallThreatString += "-" + p.name.toString() + "\n";
+        }
+
+        TextView ot = (TextView) findViewById(R.id.offthreatstv);
+        TextView wt = (TextView) findViewById(R.id.wallthreatstv);
+        ot.setText(offThreatString);
+        wt.setText(wallThreatString);
+
+        for(int i=0;i<teamType.length;i++){
+            teamType[i]=0;
+        }
+
     }
 
     public void initList()
@@ -642,7 +941,7 @@ public class MainActivity extends ActionBarActivity {
         pokeList.add(new Pokemon(Names.Charmeleon,5,FIRE,NONE,AbilityEnum.BLAZE,AbilityEnum.SOLARPOWER,AbilityEnum.NONE,true,58,64,58,80,65,80));
         pokeList.add(new Pokemon(Names.Charizard,6,FIRE,FLYING,AbilityEnum.BLAZE,AbilityEnum.SOLARPOWER,AbilityEnum.NONE,true,78,84,78,109,85,100));
         pokeList.add(new Pokemon(Names.Charizard_Mega_X,6,FIRE,DRAGON,AbilityEnum.TOUGHCLAWS,AbilityEnum.NONE,AbilityEnum.NONE,false,78,130,111,130,85,100));
-        pokeList.add(new Pokemon(Names.Charizard_Mega_Y,6,FIRE,DRAGON,AbilityEnum.DROUGHT,AbilityEnum.NONE,AbilityEnum.NONE,false,78,104,78,159,115,100));
+        pokeList.add(new Pokemon(Names.Charizard_Mega_Y,6,FIRE,FLYING,AbilityEnum.DROUGHT,AbilityEnum.NONE,AbilityEnum.NONE,false,78,104,78,159,115,100));
         pokeList.add(new Pokemon(Names.Squirtle,7,WATER,NONE,AbilityEnum.TORRENT,AbilityEnum.RAINDISH,AbilityEnum.NONE,true,44,48,65,50,64,43));
         pokeList.add(new Pokemon(Names.Wartortle,8,WATER,NONE,AbilityEnum.TORRENT,AbilityEnum.RAINDISH,AbilityEnum.NONE,true,59,63,80,65,80,58));
         pokeList.add(new Pokemon(Names.Blastoise,9,WATER,NONE,AbilityEnum.TORRENT,AbilityEnum.RAINDISH,AbilityEnum.NONE,true,79,83,100,85,105,78));
@@ -758,7 +1057,7 @@ public class MainActivity extends ActionBarActivity {
         pokeList.add(new Pokemon(Names.Chansey,113,NORMAL,NONE,AbilityEnum.NATURALCURE,AbilityEnum.SERENEGRACE,AbilityEnum.HEALER,true,250,5,5,35,105,50));
         pokeList.add(new Pokemon(Names.Tangela,114,GRASS,NONE,AbilityEnum.CHLOROPHYLL,AbilityEnum.LEAFGUARD,AbilityEnum.REGENERATOR,true,65,55,115,100,40,60));
         pokeList.add(new Pokemon(Names.Kangaskhan,115,NORMAL,NONE,AbilityEnum.EARLYBIRD,AbilityEnum.SCRAPPY,AbilityEnum.INNERFOCUS,true,105,95,80,40,80,90));
-        pokeList.add(new Pokemon(Names.Kangaskhan,115,NORMAL,NONE,AbilityEnum.PARENTALBOND,AbilityEnum.NONE,AbilityEnum.NONE,false,105,125,100,60,100,100));
+        pokeList.add(new Pokemon(Names.Kangaskhan_Mega,115,NORMAL,NONE,AbilityEnum.PARENTALBOND,AbilityEnum.NONE,AbilityEnum.NONE,false,105,125,100,60,100,100));
         pokeList.add(new Pokemon(Names.Horsea,116,WATER,NONE,AbilityEnum.SWIFTSWIM,AbilityEnum.SNIPER,AbilityEnum.DAMP,true,30,40,70,70,25,60));
         pokeList.add(new Pokemon(Names.Seadra,117,WATER,NONE,AbilityEnum.POISONPOINT,AbilityEnum.SNIPER,AbilityEnum.DAMP,true,55,65,95,95,45,85));
         pokeList.add(new Pokemon(Names.Goldeen,118,WATER,NONE,AbilityEnum.SWIFTSWIM,AbilityEnum.WATERVEIL,AbilityEnum.LIGHTNINGROD,true,45,67,60,35,50,63));
