@@ -30,7 +30,7 @@ import java.util.Arrays;
 public class MainActivity extends ActionBarActivity {
 
     public ArrayList<Pokemon> pokeList = new ArrayList<Pokemon>();
-    ArrayAdapter<Pokemon> arrayAdapter;
+    PokeListAdapter arrayAdapter;
     private ListView lv;
     EditText inputSearch;
     ImageButton activeSlot;
@@ -86,9 +86,8 @@ public class MainActivity extends ActionBarActivity {
         inputSearch.setText("Search");
         initList();
 
-         arrayAdapter = new ArrayAdapter<Pokemon>(
+         arrayAdapter = new PokeListAdapter(
                 this,
-                android.R.layout.simple_list_item_1,
                 pokeList);
 
         lv.setAdapter(arrayAdapter);
@@ -892,8 +891,8 @@ public class MainActivity extends ActionBarActivity {
         //Stat and Type Check
         for(int i = 0; i< pokeList.size(); i++){
             Pokemon currentPoke = pokeList.get(i);
-            if(currentPoke.atk >= maxDef && currentPoke.spe >= maxSpe ||
-                    currentPoke.spA >= maxSpD && currentPoke.spe >= maxSpe)
+            if((currentPoke.atk >= maxDef && currentPoke.spe >= maxSpe) ||
+                    (currentPoke.spA >= maxSpD && currentPoke.spe >= maxSpe))
             {
                 for(Type t : weakArrayType){
                     if(currentPoke.type1.name == t.name || currentPoke.type2.name == t.name) offensiveThreats.add(pokeList.get(i));
